@@ -1,10 +1,17 @@
 {
-  "name": "Test Extension",
-  "description": "Test Extension Description",
-  "version": "1.0",
   "manifest_version": 3,
+  "name": "youtube-channel-tagger",
+  "version": "0.1.0",
+  "permissions": ["storage"],
+  "host_permissions": ["https://www.youtube.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["dist/content.js"],
+      "css": ["public/content.css"]
+    }
+  ],
   "action": {
-    "default_popup": "view.html",
-    "default_icon": "icon.png"
+    "default_popup": "public/popup.html"
   }
 }

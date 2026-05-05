@@ -1,0 +1,12 @@
+{
+  "name": "youtube-channel-tagger",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3"
+  }
+}
