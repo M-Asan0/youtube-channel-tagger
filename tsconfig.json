@@ -10,7 +10,9 @@
     "strict": true,
 
     "sourceMap": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+
+    "types": ["chrome"]
   },
   "include": ["src/**/*.ts"]
 }

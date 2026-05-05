@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w"
+    "build": "esbuild src/content.ts src/popup.ts src/manage.ts --bundle --outdir=dist --format=iife --sourcemap",
+    "watch": "npm run build -- --watch"
   },
   "devDependencies": {
-    "@types/chrome": "^0.1.40",
+    "@types/chrome": "0.1.40",
+    "esbuild": "0.28.0",
     "typescript": "6.0.3"
   }
 }
