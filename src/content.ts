@@ -23,39 +23,30 @@ function extractYtInitialDataFromHtml(): any | null {
 async function syncSubscribedChannels() {
   const ytInitialData = extractYtInitialDataFromHtml();
 
-  console.log("ytInitialData loaded", ytInitialData);
-
   if (!ytInitialData) {
     console.log("youtube-channel-tagger: ytInitialData not found");
     return;
   }
 
-  const items =
-    ytInitialData.contents
-      ?.twoColumnBrowseResultsRenderer
-      ?.tabs?.[0]
-      ?.tabRenderer
-      ?.content
-      ?.sectionListRenderer
-      ?.contents;
+  const channelItems =
+    ytInitialData.contents?.twoColumnBrowseResultsRenderer?.tabs?.[0]
+      ?.tabRenderer?.content?.sectionListRenderer?.contents?.[0]
+      ?.itemSectionRenderer?.contents?.[0]?.shelfRenderer?.content
+      ?.expandedShelfContentsRenderer?.items ?? [];
 
-  const channels = items?.flatMap((section: any) =>
-    section?.itemSectionRenderer?.contents?.flatMap((shelf: any) =>
-      shelf?.shelfRenderer?.content?.expandedShelfContentsRenderer?.items?.map((item: any) => {
-        const ch = item?.channelRenderer;
-        if (!ch) return null;
+  const channels = channelItems
+    .map((item: any) => {
+      const ch = item?.channelRenderer;
+      if (!ch) return null;
 
-        return {
-          id: ch.channelId,
-          title: ch.title?.simpleText,
-          url: `https://www.youtube.com/channel/${ch.channelId}`,
-          lastSeenAt: Date.now(),
-        };
-      }) ?? []
-    ) ?? []
-  ).filter(Boolean);
-
-  console.log("channels", channels);
+      return {
+        id: ch.channelId,
+        title: ch.title?.simpleText,
+        url: `https://www.youtube.com/channel/${ch.channelId}`,
+        lastSeenAt: Date.now(),
+      };
+    })
+    .filter(Boolean);
 
   if (!channels || channels.length === 0) {
     console.log("youtube-channel-tagger: no subscribed channels found");
