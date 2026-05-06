@@ -7,11 +7,17 @@
   "content_scripts": [
     {
       "matches": ["https://www.youtube.com/*"],
-      "js": ["dist/content.js"],
-      "css": ["public/content.css"]
+      "js": ["content.js"],
+      "css": ["content.css"]
     }
   ],
   "action": {
-    "default_popup": "public/popup.html"
-  }
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["manage.html", "manage.js"],
+      "matches": ["https://www.youtube.com/*"]
+    }
+  ]
 }

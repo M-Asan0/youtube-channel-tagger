@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "esbuild src/content.ts src/popup.ts src/manage.ts --bundle --outdir=dist --format=iife --sourcemap",
-    "watch": "npm run build -- --watch"
+  "build": "esbuild src/content.ts src/popup.ts src/manage.ts --bundle --outdir=dist --format=iife --sourcemap && cp manifest.json dist/manifest.json && cp public/popup.html dist/popup.html && cp public/manage.html dist/manage.html && cp public/content.css dist/content.css",
+  "watch": "npm run build -- --watch"
   },
   "devDependencies": {
     "@types/chrome": "0.1.40",

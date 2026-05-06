@@ -20,6 +20,7 @@ function extractYtInitialDataFromHtml(): any | null {
     return null;
   }
 }
+
 async function syncSubscribedChannels() {
   const ytInitialData = extractYtInitialDataFromHtml();
 
@@ -64,6 +65,36 @@ async function syncSubscribedChannels() {
   console.log(`youtube-channel-tagger: synced ${channels.length} channels`);
 }
 
-if (location.pathname === "/feed/channels") {
-  syncSubscribedChannels();
+function addChannelTagsLink() {
+  if (document.getElementById("yt-channel-tagger-link")) return;
+
+  const sections = document.querySelector("ytd-guide-renderer #sections");
+  if (!sections) return;
+
+  const item = document.createElement("a");
+  item.id = "yt-channel-tagger-link";
+  item.href = chrome.runtime.getURL("manage.html");
+  item.target = "_blank";
+  item.textContent = "Channel Tags";
+
+  item.style.display = "block";
+  item.style.padding = "10px 24px";
+  item.style.color = "var(--yt-spec-text-primary)";
+  item.style.textDecoration = "none";
+  item.style.fontSize = "14px";
+
+  sections.appendChild(item);
 }
+
+function init() {
+  addChannelTagsLink();
+
+  setTimeout(addChannelTagsLink, 1000);
+  setTimeout(addChannelTagsLink, 3000);
+
+  if (location.pathname === "/feed/channels") {
+    syncSubscribedChannels();
+  }
+}
+
+init();
