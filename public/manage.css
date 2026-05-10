@@ -1,0 +1,8 @@
+.tag-candidate-item{
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+.tag-candidate-item:hover {
+  background: #e8f0fe;
+}

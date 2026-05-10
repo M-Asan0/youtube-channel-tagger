@@ -3,11 +3,18 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-  "build": "esbuild src/content.ts src/popup.ts src/manage.ts --bundle --outdir=dist --format=iife --sourcemap && cp manifest.json dist/manifest.json && cp public/popup.html dist/popup.html && cp public/manage.html dist/manage.html && cp public/content.css dist/content.css",
-  "watch": "npm run build -- --watch"
+    "copy": "cp manifest.json dist/manifest.json && cp public/popup.html dist/popup.html && cp public/manage.html dist/manage.html && cp public/content.css dist/content.css && cp public/manage.css dist/manage.css",
+    "build": "esbuild src/content.ts src/popup.ts src/manage.tsx --bundle --outdir=dist --format=iife --sourcemap && npm run copy",
+    "watch": "npm run copy && esbuild src/content.ts src/popup.ts src/manage.tsx --bundle --outdir=dist --format=iife --sourcemap --watch=forever"
+  },
+  "dependencies": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
     "@types/chrome": "0.1.40",
+    "@types/react": "19.1.4",
+    "@types/react-dom": "19.1.4",
     "esbuild": "0.28.0",
     "typescript": "6.0.3"
   }

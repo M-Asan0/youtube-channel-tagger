@@ -54,15 +54,19 @@ async function syncSubscribedChannels() {
     return;
   }
 
-  const data = await getAppData();
+  try {
+    const data = await getAppData();
 
-  for (const ch of channels) {
-    data.channels[ch.id] = ch;
+    for (const ch of channels) {
+      data.channels[ch.id] = ch;
+    }
+
+    await setAppData(data);
+
+    console.log(`youtube-channel-tagger: synced ${channels.length} channels`);
+  } catch {
+    // Extension context may have been invalidated by a reload
   }
-
-  await setAppData(data);
-
-  console.log(`youtube-channel-tagger: synced ${channels.length} channels`);
 }
 
 function addChannelTagsLink() {
@@ -71,9 +75,16 @@ function addChannelTagsLink() {
   const sections = document.querySelector("ytd-guide-renderer #sections");
   if (!sections) return;
 
+  let manageUrl: string;
+  try {
+    manageUrl = chrome.runtime.getURL("manage.html");
+  } catch {
+    return;
+  }
+
   const item = document.createElement("a");
   item.id = "yt-channel-tagger-link";
-  item.href = chrome.runtime.getURL("manage.html");
+  item.href = manageUrl;
   item.target = "_blank";
   item.textContent = "Channel Tags";
 
