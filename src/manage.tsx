@@ -9,6 +9,8 @@ type TagInputProps = {
   onChange: (ids: string[]) => void;
 };
 
+type Tab = "tags" | "channels";
+
 function SelectedTags({
   allTags,
   selectedIds,
@@ -153,6 +155,7 @@ function TagInput({ allTags, selectedIds, onChange }: TagInputProps) {
 function App() {
   const [appData, setAppDataState] = useState<AppData | null>(null);
   const [tagInput, setTagInput] = useState("");
+  const [activeTab, setActiveTab] = useState<Tab>("channels");
 
   useEffect(() => {
     getAppData().then(setAppDataState);
@@ -215,52 +218,92 @@ function App() {
     <div>
       <h1>YouTube Channel Tagger</h1>
 
-      <section>
-        <h2>Tags</h2>
+      <div
+        style={{
+          display: "flex",
+          borderBottom: "1px solid #ccc",
+          marginBottom: 16,
+        }}
+      >
+        <button
+          onClick={() => setActiveTab("channels")}
+          style={{
+            padding: "8px 16px",
+            border: "none",
+            borderBottom:
+              activeTab === "channels" ? "2px solid #000" : "2px solid transparent",
+            background: "transparent",
+            cursor: "pointer",
+            fontWeight: activeTab === "channels" ? "bold" : "normal",
+          }}
+        >
+          Channels
+        </button>
 
-        <input
-          value={tagInput}
-          onChange={(e) => setTagInput(e.target.value)}
-          placeholder="タグ名"
-        />
+        <button
+          onClick={() => setActiveTab("tags")}
+          style={{
+            padding: "8px 16px",
+            border: "none",
+            borderBottom:
+              activeTab === "tags" ? "2px solid #000" : "2px solid transparent",
+            background: "transparent",
+            cursor: "pointer",
+            fontWeight: activeTab === "tags" ? "bold" : "normal",
+          }}
+        >
+          Tags
+        </button>
+      </div>
 
-        <button onClick={addTag}>追加</button>
+      {activeTab === "tags" && (
+        <section>
+          <h2>Tags</h2>
 
-        {tags.length === 0 ? (
-          <p>タグがありません</p>
-        ) : (
-          <ul>
-            {tags.map((tag) => (
-              <li key={tag.id}>{tag.name}</li>
-            ))}
-          </ul>
-        )}
-      </section>
+          <input
+            value={tagInput}
+            onChange={(e) => setTagInput(e.target.value)}
+            placeholder="タグ名"
+          />
 
-      <section>
-        <h2>Channels</h2>
+          <button onClick={addTag}>追加</button>
 
-        {channels.length === 0 ? (
-          <p>登録チャンネルがありません</p>
-        ) : (
-          <ul style={{ listStyle: "none", padding: 0 }}>
-            {channels.map((ch) => (
-              <li key={ch.id} style={{ marginBottom: 8 }}>
-                <strong>{ch.title}</strong>
-                <br />
+          {tags.length === 0 ? (
+            <p>タグがありません</p>
+          ) : (
+            <ul>
+              {tags.map((tag) => (
+                <li key={tag.id}>{tag.name}</li>
+              ))}
+            </ul>
+          )}
+        </section>
+      )}
 
-                <TagInput
-                  allTags={tags}
-                  selectedIds={appData.channelTags[ch.id] ?? []}
-                  onChange={(ids) =>
-                    updateChannelTags(ch.id, ids)
-                  }
-                />
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+      {activeTab === "channels" && (
+        <section>
+          <h2>Channels</h2>
+
+          {channels.length === 0 ? (
+            <p>登録チャンネルがありません</p>
+          ) : (
+            <ul style={{ listStyle: "none", padding: 0 }}>
+              {channels.map((ch) => (
+                <li key={ch.id} style={{ marginBottom: 8 }}>
+                  <strong>{ch.title}</strong>
+                  <br />
+
+                  <TagInput
+                    allTags={tags}
+                    selectedIds={appData.channelTags[ch.id] ?? []}
+                    onChange={(ids) => updateChannelTags(ch.id, ids)}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      )}
     </div>
   );
 }
