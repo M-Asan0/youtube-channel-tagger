@@ -217,10 +217,10 @@ export function TagManagement({
               minWidth: 320,
             }}
           >
-            <h3>タグを編集</h3>
+            <h3>Edit Tag</h3>
 
             <div>
-              <label>タグ名</label>
+              <label>Tag Name</label>
               <br />
               <input
                 value={editingTag.name}
@@ -234,7 +234,7 @@ export function TagManagement({
             </div>
 
             <div style={{ marginTop: 8 }}>
-              <label>色</label>
+              <label>Color</label>
               <br />
               <input
                 value={editingTag.color}
@@ -260,12 +260,12 @@ export function TagManagement({
             </div>
 
             <div style={{ marginTop: 16 }}>
-              <button onClick={updateTag}>保存</button>
+              <button onClick={updateTag}>Save</button>
               <button
                 onClick={() => setEditingTag(null)}
                 style={{ marginLeft: 8 }}
               >
-                キャンセル
+                Cancel
               </button>
             </div>
           </div>
