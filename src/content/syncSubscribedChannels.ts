@@ -1,8 +1,8 @@
 import { getAppData, setAppData } from "../storage";
-import { extractYtInitialDataFromHtml } from "./ytInitialData";
+import { parseYtInitialData } from "./parseYtInitialData";
 
 export async function syncSubscribedChannels() {
-  const ytInitialData = extractYtInitialDataFromHtml();
+  const ytInitialData = parseYtInitialData();
 
   if (!ytInitialData) {
     console.log("youtube-channel-tagger: ytInitialData not found");
