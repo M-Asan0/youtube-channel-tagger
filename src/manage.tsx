@@ -87,14 +87,6 @@ function App() {
         </button>
       </div>
 
-      {activeTab === "tags" && (
-        <TagManagement
-          tags={tags}
-          appData={appData}
-          setAppDataState={setAppDataState}
-        />
-      )}
-
       {activeTab === "channels" && (
         <section>
           <h2>Channels</h2>
@@ -118,6 +110,14 @@ function App() {
             </ul>
           )}
         </section>
+      )}
+
+      {activeTab === "tags" && (
+        <TagManagement
+          tags={tags}
+          appData={appData}
+          setAppDataState={setAppDataState}
+        />
       )}
     </div>
   );
