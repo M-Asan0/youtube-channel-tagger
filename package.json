@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "copy": "cp manifest.json dist/manifest.json && cp public/popup.html dist/popup.html && cp public/manage.html dist/manage.html && cp public/content.css dist/content.css && cp public/manage.css dist/manage.css",
+    "copy": "mkdir -p dist && cp manifest.json dist/manifest.json && cp public/popup.html dist/popup.html && cp public/manage.html dist/manage.html && cp public/content.css dist/content.css && cp public/manage.css dist/manage.css",
     "build": "esbuild src/content.ts src/popup.ts src/manage.tsx --bundle --outdir=dist --format=iife --sourcemap --jsx=automatic && npm run copy",
     "watch": "npm run copy && esbuild src/content.ts src/popup.ts src/manage.tsx --bundle --outdir=dist --format=iife --sourcemap --jsx=automatic --watch=forever"
   },
