@@ -18,9 +18,9 @@ export function TagInput({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const candidates = allTags.filter(
-    (t) =>
-      t.name.toLowerCase().includes(query.toLowerCase()) &&
-      !selectedIds.includes(t.id)
+    (tag) =>
+      tag.name.toLowerCase().includes(query.toLowerCase()) &&
+      !selectedIds.includes(tag.id)
   );
 
   function select(id: string) {
