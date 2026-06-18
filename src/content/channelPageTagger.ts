@@ -1,4 +1,4 @@
-import { getAppData, setAppData } from "../storage";
+import { fetchAppData, saveAppData } from "../storage";
 import type { AppData } from "../types";
 
 function isChannelPage() {
@@ -67,13 +67,13 @@ export async function addChannelPageTagger() {
 
   let data: AppData;
   try {
-    data = await getAppData();
+    data = await fetchAppData();
   } catch {
     return;
   }
 
   data.channels[channelId] = channel;
-  await setAppData(data);
+  await saveAppData(data);
 
   const tags = Object.values(data.tags).sort((a, b) => a.order - b.order);
 
@@ -176,7 +176,7 @@ export async function addChannelPageTagger() {
           delete data.channelTags[channelId];
         }
 
-        await setAppData(data);
+        await saveAppData(data);
         renderSelectedTags();
         renderOptions();
       });
@@ -195,7 +195,7 @@ export async function addChannelPageTagger() {
 
     if (!selectedIds.includes(tagId)) {
       data.channelTags[channelId] = [...selectedIds, tagId];
-      await setAppData(data);
+      await saveAppData(data);
     }
 
     renderSelectedTags();

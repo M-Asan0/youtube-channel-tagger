@@ -1,4 +1,4 @@
-import { getAppData } from "../storage";
+import { fetchAppData } from "../storage";
 
 export async function addTaggedSubscriptionsSection() {
   if (document.getElementById("yt-channel-tagger-section")) return;
@@ -15,7 +15,7 @@ export async function addTaggedSubscriptionsSection() {
 
   let data;
   try {
-    data = await getAppData();
+    data = await fetchAppData();
   } catch {
     return;
   }

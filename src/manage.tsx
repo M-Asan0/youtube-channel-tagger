@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { getAppData, setAppData } from "./storage";
+import { fetchAppData, saveAppData } from "./storage";
 import type { AppData } from "./types";
 import { TagInput } from "./components/TagInput";
 import { TagManagement } from "./components/TagManagement";
@@ -8,11 +8,11 @@ import { TagManagement } from "./components/TagManagement";
 type Tab = "tags" | "channels";
 
 function App() {
-  const [appData, setAppDataState] = useState<AppData | null>(null);
+  const [appData, setAppData] = useState<AppData | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>("channels");
 
   useEffect(() => {
-    getAppData().then(setAppDataState);
+    fetchAppData().then(setAppData);
   }, []);
 
   async function updateChannelTags(channelId: string, tagIds: string[]) {
@@ -31,8 +31,8 @@ function App() {
       channelTags,
     };
 
-    await setAppData(next);
-    setAppDataState(next);
+    await saveAppData(next);
+    setAppData(next);
   }
 
   if (!appData) return <p>Loading...</p>;
@@ -116,7 +116,7 @@ function App() {
         <TagManagement
           tags={tags}
           appData={appData}
-          setAppDataState={setAppDataState}
+          setAppData={setAppData}
         />
       )}
     </div>

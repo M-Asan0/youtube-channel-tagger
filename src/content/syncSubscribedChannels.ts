@@ -1,4 +1,4 @@
-import { getAppData, setAppData } from "../storage";
+import { fetchAppData, saveAppData } from "../storage";
 import { parseYtInitialData } from "./parseYtInitialData";
 
 export async function syncSubscribedChannels() {
@@ -35,13 +35,13 @@ export async function syncSubscribedChannels() {
   }
 
   try {
-    const data = await getAppData();
+    const data = await fetchAppData();
 
     for (const ch of channels) {
       data.channels[ch.id] = ch;
     }
 
-    await setAppData(data);
+    await saveAppData(data);
 
     console.log(`youtube-channel-tagger: synced ${channels.length} channels`);
   } catch {

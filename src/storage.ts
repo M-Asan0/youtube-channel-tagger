@@ -9,13 +9,13 @@ export const DEFAULT_DATA: AppData = {
   channelTags: {},
 };
 
-export async function getAppData(): Promise<AppData> {
+export async function fetchAppData(): Promise<AppData> {
   const result = await chrome.storage.local.get(STORAGE_KEY);
   return result[STORAGE_KEY] as AppData ?? DEFAULT_DATA;
 }
 
-export async function setAppData(data: AppData): Promise<void> {
-    await chrome.storage.local.set({
-        [ STORAGE_KEY ]: data,
-    })
+export async function saveAppData(data: AppData): Promise<void> {
+  await chrome.storage.local.set({
+    [STORAGE_KEY]: data,
+  })
 }

@@ -1,25 +1,25 @@
 import React, { useState } from "react";
-import { setAppData } from "../storage";
+import { saveAppData } from "../storage";
 import type { AppData, Tag } from "../types";
 
 type TagManagementProps = {
   tags: Tag[];
   appData: AppData;
-  setAppDataState: React.Dispatch<React.SetStateAction<AppData | null>>;
+  setAppData: React.Dispatch<React.SetStateAction<AppData | null>>;
 };
 
 export function TagManagement({
   tags,
   appData,
-  setAppDataState,
+  setAppData,
 }: TagManagementProps) {
   const [tagInput, setTagInput] = useState("");
   const [colorInput, setColorInput] = useState("#999999");
   const [editingTag, setEditingTag] = useState<Tag | null>(null);
 
-  async function saveAppData(next: AppData) {
-    await setAppData(next);
-    setAppDataState(next);
+  async function commitAppData(next: AppData) {
+    await saveAppData(next);
+    setAppData(next);
   }
 
   async function addTag() {
@@ -42,7 +42,7 @@ export function TagManagement({
       },
     };
 
-    await saveAppData(next);
+    await commitAppData(next);
     setTagInput("");
     setColorInput("#999999");
   }
@@ -65,7 +65,7 @@ export function TagManagement({
       },
     };
 
-    await saveAppData(next);
+    await commitAppData(next);
     setEditingTag(null);
   }
 
@@ -96,7 +96,7 @@ export function TagManagement({
       channelTags: nextChannelTags,
     };
 
-    await saveAppData(next);
+    await commitAppData(next);
   }
 
   function getUsedCount(tagId: string) {
