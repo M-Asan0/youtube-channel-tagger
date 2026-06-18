@@ -4,8 +4,9 @@ import { fetchAppData, saveAppData } from "./storage";
 import type { AppData } from "./types";
 import { ChannelTagInput } from "./components/ChannelTagInput";
 import { TagManagement } from "./components/TagManagement";
+import { ImportExportManagement } from "./components/ImportExportManagement"
 
-type Tab = "tags" | "channels";
+type Tab = "tags" | "channels" | "importExport";
 
 function App() {
   const [appData, setAppData] = useState<AppData | null>(null);
@@ -85,6 +86,21 @@ function App() {
         >
           Tags
         </button>
+
+        <button
+          onClick={() => setActiveTab("importExport")}
+          style={{
+            padding: "8px 16px",
+            border: "none",
+            borderBottom:
+              activeTab === "importExport" ? "2px solid #000" : "2px solid transparent",
+            background: "transparent",
+            cursor: "pointer",
+            fontWeight: activeTab === "importExport" ? "bold" : "normal",
+          }}
+        >
+          Import / Export
+        </button>
       </div>
 
       {activeTab === "channels" && (
@@ -118,6 +134,10 @@ function App() {
           appData={appData}
           setAppData={setAppData}
         />
+      )}
+
+      {activeTab === "importExport" && (
+        <ImportExportManagement appData={appData} />
       )}
     </div>
   );
