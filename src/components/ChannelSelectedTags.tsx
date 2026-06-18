@@ -1,16 +1,16 @@
 import type { Tag } from "../types";
 
-type SelectedTagsProps = {
+type ChannelSelectedTagsProps = {
   allTags: Tag[];
   selectedIds: string[];
   onRemove: (id: string) => void;
 };
 
-export function SelectedTags({
+export function ChannelSelectedTags({
   allTags,
   selectedIds,
   onRemove,
-}: SelectedTagsProps) {
+}: ChannelSelectedTagsProps) {
   return (
     <div
       style={{

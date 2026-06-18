@@ -1,18 +1,18 @@
 import { useRef, useState } from "react";
 import type { Tag } from "../types";
-import { SelectedTags } from "./SelectedTags";
+import { ChannelSelectedTags } from "./ChannelSelectedTags";
 
-type TagInputProps = {
+type ChannelTagInputProps = {
   allTags: Tag[];
   selectedIds: string[];
   onChange: (ids: string[]) => void;
 };
 
-export function TagInput({
+export function ChannelTagInput({
   allTags,
   selectedIds,
   onChange,
-}: TagInputProps) {
+}: ChannelTagInputProps) {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -87,7 +87,7 @@ export function TagInput({
         )}
       </div>
 
-      <SelectedTags
+      <ChannelSelectedTags
         allTags={allTags}
         selectedIds={selectedIds}
         onRemove={remove}

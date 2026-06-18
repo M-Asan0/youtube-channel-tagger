@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { fetchAppData, saveAppData } from "./storage";
 import type { AppData } from "./types";
-import { TagInput } from "./components/TagInput";
+import { ChannelTagInput } from "./components/ChannelTagInput";
 import { TagManagement } from "./components/TagManagement";
 
 type Tab = "tags" | "channels";
@@ -100,7 +100,7 @@ function App() {
                   <strong>{ch.title}</strong>
                   <br />
 
-                  <TagInput
+                  <ChannelTagInput
                     allTags={tags}
                     selectedIds={appData.channelTags[ch.id] ?? []}
                     onChange={(ids) => updateChannelTags(ch.id, ids)}
