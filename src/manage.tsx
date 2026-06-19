@@ -137,7 +137,7 @@ function App() {
       )}
 
       {activeTab === "importExport" && (
-        <ImportExportManagement appData={appData} />
+        <ImportExportManagement appData={appData} setAppData={setAppData} />
       )}
     </div>
   );
