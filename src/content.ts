@@ -2,6 +2,12 @@ import { syncSubscribedChannels } from "./content/syncSubscribedChannels";
 import { addTaggedSubscriptionsSection } from "./content/sidebar";
 import { addChannelPageTagger } from "./content/channelPageTagger";
 
+let lastPathname = location.pathname;
+
+function notifySynced() {
+  chrome.runtime.sendMessage({ type: "channelsSynced" }).catch(() => {});
+}
+
 function init() {
   addTaggedSubscriptionsSection();
   addChannelPageTagger();
@@ -13,8 +19,23 @@ function init() {
   setTimeout(addChannelPageTagger, 3000);
 
   if (location.pathname === "/feed/channels") {
-    syncSubscribedChannels();
+    syncSubscribedChannels().then(notifySynced);
   }
+
+  document.addEventListener("yt-navigate-finish", () => {
+    const enteredChannelsPage =
+      location.pathname === "/feed/channels" &&
+      lastPathname !== location.pathname;
+
+    lastPathname = location.pathname;
+
+    addTaggedSubscriptionsSection();
+    addChannelPageTagger();
+
+    if (enteredChannelsPage) {
+      chrome.runtime.sendMessage({ type: "syncChannelsRequest" }).catch(() => {});
+    }
+  });
 }
 
 init();

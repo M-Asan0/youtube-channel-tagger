@@ -11,10 +11,21 @@ type Tab = "tags" | "channels" | "importExport";
 function App() {
   const [appData, setAppData] = useState<AppData | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>("channels");
+  const [syncing, setSyncing] = useState(false);
 
   useEffect(() => {
     fetchAppData().then(setAppData);
   }, []);
+
+  async function syncChannels() {
+    setSyncing(true);
+    try {
+      await chrome.runtime.sendMessage({ type: "syncChannelsRequest" });
+      setAppData(await fetchAppData());
+    } finally {
+      setSyncing(false);
+    }
+  }
 
   async function updateChannelTags(channelId: string, tagIds: string[]) {
     if (!appData) return;
@@ -105,7 +116,18 @@ function App() {
 
       {activeTab === "channels" && (
         <section>
-          <h2>Channels</h2>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <h2>Channels</h2>
+            <button onClick={syncChannels} disabled={syncing}>
+              {syncing ? "同期中..." : "登録チャンネルを同期"}
+            </button>
+          </div>
 
           {channels.length === 0 ? (
             <p>登録チャンネルがありません</p>
