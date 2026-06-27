@@ -4,10 +4,6 @@ import { addChannelPageTagger } from "./content/channelPageTagger";
 
 let lastPathname = location.pathname;
 
-function notifySynced() {
-  chrome.runtime.sendMessage({ type: "channelsSynced" }).catch(() => {});
-}
-
 function init() {
   addTaggedSubscriptionsSection();
   addChannelPageTagger();
@@ -19,7 +15,7 @@ function init() {
   setTimeout(addChannelPageTagger, 3000);
 
   if (location.pathname === "/feed/channels") {
-    syncSubscribedChannels().then(notifySynced);
+    syncSubscribedChannels();
   }
 
   document.addEventListener("yt-navigate-finish", () => {

@@ -1,35 +1,18 @@
 import { fetchAppData, saveAppData } from "../storage";
 import { parseYtInitialData } from "./parseYtInitialData";
+import { extractChannelsFromYtInitialData } from "./extractChannels";
 
 export async function syncSubscribedChannels() {
-  const ytInitialData = parseYtInitialData();
+  const ytInitialData = parseYtInitialData(document.documentElement.innerHTML);
 
   if (!ytInitialData) {
     console.log("youtube-channel-tagger: ytInitialData not found");
     return;
   }
 
-  const channelItems =
-    ytInitialData.contents?.twoColumnBrowseResultsRenderer?.tabs?.[0]
-      ?.tabRenderer?.content?.sectionListRenderer?.contents?.[0]
-      ?.itemSectionRenderer?.contents?.[0]?.shelfRenderer?.content
-      ?.expandedShelfContentsRenderer?.items ?? [];
+  const channels = extractChannelsFromYtInitialData(ytInitialData);
 
-  const channels = channelItems
-    .map((item: any) => {
-      const ch = item?.channelRenderer;
-      if (!ch) return null;
-
-      return {
-        id: ch.channelId,
-        title: ch.title?.simpleText,
-        url: `https://www.youtube.com/channel/${ch.channelId}`,
-        lastSeenAt: Date.now(),
-      };
-    })
-    .filter(Boolean);
-
-  if (!channels || channels.length === 0) {
+  if (channels.length === 0) {
     console.log("youtube-channel-tagger: no subscribed channels found");
     return;
   }

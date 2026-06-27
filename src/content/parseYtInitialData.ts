@@ -1,5 +1,4 @@
-export function parseYtInitialData(): any | null {
-  const html = document.documentElement.innerHTML;
+export function parseYtInitialData(html: string): any | null {
   const marker = "var ytInitialData = ";
   const start = html.indexOf(marker);
 
