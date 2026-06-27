@@ -29,7 +29,7 @@ function init() {
     addChannelPageTagger();
 
     if (enteredChannelsPage) {
-      chrome.runtime.sendMessage({ type: "syncChannelsRequest" }).catch(() => {});
+      syncSubscribedChannels();
     }
   });
 }
