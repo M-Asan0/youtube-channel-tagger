@@ -118,14 +118,14 @@ function App() {
         <section>
           <div
             style={{
-              display: "flex",
+              display: "flex-col",
               alignItems: "center",
               justifyContent: "space-between",
             }}
           >
             <h2>Channels</h2>
             <button onClick={syncChannels} disabled={syncing}>
-              {syncing ? "同期中..." : "登録チャンネルを同期"}
+              {syncing ? "synchronization..." : "Sync subscribed channels"}
             </button>
           </div>
 
