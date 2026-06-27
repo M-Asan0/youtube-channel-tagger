@@ -49,7 +49,8 @@ function findChannelButtonArea() {
 
 export async function addChannelPageTagger() {
   if (!isChannelPage()) return;
-  if (document.getElementById("yt-channel-page-tagger")) return;
+  const existing = document.getElementById("yt-channel-page-tagger");
+  if (existing) existing.remove();
 
   const channel = getCurrentChannelInfo();
   if (!channel) return;

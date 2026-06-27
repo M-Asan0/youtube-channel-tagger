@@ -1,7 +1,8 @@
 import { fetchAppData } from "../storage";
 
 export async function addTaggedSubscriptionsSection() {
-  if (document.getElementById("yt-channel-tagger-section")) return;
+  const existing = document.getElementById("yt-channel-tagger-section");
+  if (existing) existing.remove();
 
   const sections = document.querySelector("ytd-guide-renderer #sections");
   if (!sections) return;
