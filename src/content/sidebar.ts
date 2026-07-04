@@ -86,7 +86,7 @@ export async function addTaggedSubscriptionsSection() {
 
     const arrow = document.createElement("span");
 
-    arrow.textContent = details.open ? "▼" : "▶";
+    arrow.textContent = "▶";
 
     arrow.style.display = "inline-block";
     arrow.style.width = "16px";
@@ -94,6 +94,8 @@ export async function addTaggedSubscriptionsSection() {
     arrow.style.fontSize = "10px";
     arrow.style.flexShrink = "0";
     arrow.style.color = textColor;
+    arrow.style.transition = "transform 0.15s";
+    arrow.style.transform = details.open ? "rotate(90deg)" : "rotate(0deg)";
 
     const tagName = document.createElement("span");
 
@@ -109,7 +111,7 @@ export async function addTaggedSubscriptionsSection() {
     details.appendChild(summary);
 
     details.addEventListener("toggle", () => {
-      arrow.textContent = details.open ? "▼" : "▶";
+      arrow.style.transform = details.open ? "rotate(90deg)" : "rotate(0deg)";
     });
 
     for (const channel of taggedChannels) {
