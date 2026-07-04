@@ -28,10 +28,10 @@ export function ChannelSelectedTags({
           <span
             key={id}
             style={{
-              background: tag.color,
-              color: "#fff",
+              border: "1px solid #ddd",
+              borderBottom: `2px solid ${tag.color}`,
               borderRadius: 4,
-              padding: "2px 6px",
+              padding: "2px 4px 1px",
               fontSize: 12,
               display: "flex",
               alignItems: "center",
@@ -44,7 +44,7 @@ export function ChannelSelectedTags({
               style={{
                 background: "none",
                 border: "none",
-                color: "#fff",
+                color: "inherit",
                 cursor: "pointer",
                 padding: 0,
                 lineHeight: 1,

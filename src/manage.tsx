@@ -121,6 +121,8 @@ function App() {
               display: "flex-col",
               alignItems: "center",
               justifyContent: "space-between",
+              paddingBottom: 8,
+              borderBottom: "1px solid #eee",
             }}
           >
             <h2>Channels</h2>
@@ -134,7 +136,14 @@ function App() {
           ) : (
             <ul style={{ listStyle: "none", padding: 0 }}>
               {channels.map((ch) => (
-                <li key={ch.id} style={{ marginBottom: 8 }}>
+                <li
+                  key={ch.id}
+                  style={{
+                    marginBottom: 8,
+                    paddingBottom: 8,
+                    borderBottom: "1px solid #eee",
+                  }}
+                >
                   <strong>{ch.title}</strong>
                   <br />
 

@@ -31,7 +31,8 @@ export async function addTaggedSubscriptionsSection() {
   const wrapper = document.createElement("div");
   wrapper.id = "yt-channel-tagger-section";
   wrapper.style.padding = "8px 0";
-  wrapper.style.borderTop = "1px solid var(--yt-spec-10-percent-layer)";
+  wrapper.style.borderTop = "1px solid var(--yt-spec-10-percent-layer, rgba(0, 0, 0, 0.12))";
+  wrapper.style.borderBottom = "1px solid var(--yt-spec-10-percent-layer, rgba(0, 0, 0, 0.12))";
 
   const title = document.createElement("div");
   title.textContent = "Channel Tags";
@@ -86,7 +87,7 @@ export async function addTaggedSubscriptionsSection() {
 
     const arrow = document.createElement("span");
 
-    arrow.textContent = details.open ? "▼" : "▶";
+    arrow.textContent = "▶";
 
     arrow.style.display = "inline-block";
     arrow.style.width = "16px";
@@ -94,30 +95,24 @@ export async function addTaggedSubscriptionsSection() {
     arrow.style.fontSize = "10px";
     arrow.style.flexShrink = "0";
     arrow.style.color = textColor;
-
-    const tagColor = document.createElement("div");
-
-    tagColor.style.backgroundColor = tag.color;
-    tagColor.style.width = "12px";
-    tagColor.style.height = "12px";
-    tagColor.style.display = "inline-block";
-    tagColor.style.marginRight = "8px";
-    tagColor.style.borderRadius = "2px";
-    tagColor.style.flexShrink = "0";
+    arrow.style.transition = "transform 0.15s";
+    arrow.style.transform = details.open ? "rotate(90deg)" : "rotate(0deg)";
 
     const tagName = document.createElement("span");
 
     tagName.textContent = tag.name;
     tagName.style.color = textColor;
+    tagName.style.fontSize = "15px";
+    tagName.style.borderBottom = `2px solid ${tag.color}`;
+    tagName.style.paddingBottom = "1px";
 
     summary.appendChild(arrow);
-    summary.appendChild(tagColor);
     summary.appendChild(tagName);
 
     details.appendChild(summary);
 
     details.addEventListener("toggle", () => {
-      arrow.textContent = details.open ? "▼" : "▶";
+      arrow.style.transform = details.open ? "rotate(90deg)" : "rotate(0deg)";
     });
 
     for (const channel of taggedChannels) {
