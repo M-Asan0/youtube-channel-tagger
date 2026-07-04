@@ -31,7 +31,8 @@ export async function addTaggedSubscriptionsSection() {
   const wrapper = document.createElement("div");
   wrapper.id = "yt-channel-tagger-section";
   wrapper.style.padding = "8px 0";
-  wrapper.style.borderTop = "1px solid var(--yt-spec-10-percent-layer)";
+  wrapper.style.borderTop = "1px solid var(--yt-spec-10-percent-layer, rgba(0, 0, 0, 0.12))";
+  wrapper.style.borderBottom = "1px solid var(--yt-spec-10-percent-layer, rgba(0, 0, 0, 0.12))";
 
   const title = document.createElement("div");
   title.textContent = "Channel Tags";
