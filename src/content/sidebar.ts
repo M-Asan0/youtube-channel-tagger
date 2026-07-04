@@ -95,23 +95,15 @@ export async function addTaggedSubscriptionsSection() {
     arrow.style.flexShrink = "0";
     arrow.style.color = textColor;
 
-    const tagColor = document.createElement("div");
-
-    tagColor.style.backgroundColor = tag.color;
-    tagColor.style.width = "12px";
-    tagColor.style.height = "12px";
-    tagColor.style.display = "inline-block";
-    tagColor.style.marginRight = "8px";
-    tagColor.style.borderRadius = "2px";
-    tagColor.style.flexShrink = "0";
-
     const tagName = document.createElement("span");
 
     tagName.textContent = tag.name;
     tagName.style.color = textColor;
+    tagName.style.fontSize = "15px";
+    tagName.style.borderBottom = `2px solid ${tag.color}`;
+    tagName.style.paddingBottom = "1px";
 
     summary.appendChild(arrow);
-    summary.appendChild(tagColor);
     summary.appendChild(tagName);
 
     details.appendChild(summary);
