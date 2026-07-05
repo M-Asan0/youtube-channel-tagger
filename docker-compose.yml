@@ -1,7 +1,6 @@
 services:
-  build:
+  dev:
     build: .
     volumes:
       - .:/app
       - /app/node_modules
-    command: npm run watch
