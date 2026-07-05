@@ -76,7 +76,6 @@ export async function addTaggedSubscriptionsSection() {
     details.open = true;
 
     const summary = document.createElement("summary");
-    summary.classList.add("ytct-row");
 
     summary.style.padding = "8px 24px 4px";
     summary.style.fontSize = "13px";
