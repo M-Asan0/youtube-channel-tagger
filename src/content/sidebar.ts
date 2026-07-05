@@ -47,6 +47,7 @@ export async function addTaggedSubscriptionsSection() {
   manageLink.href = manageUrl;
   manageLink.target = "_blank";
   manageLink.textContent = "Open tag management";
+  manageLink.classList.add("ytct-row");
 
   manageLink.style.display = "block";
   manageLink.style.padding = "6px 24px";
@@ -75,6 +76,7 @@ export async function addTaggedSubscriptionsSection() {
     details.open = true;
 
     const summary = document.createElement("summary");
+    summary.classList.add("ytct-row");
 
     summary.style.padding = "8px 24px 4px";
     summary.style.fontSize = "13px";
@@ -120,6 +122,7 @@ export async function addTaggedSubscriptionsSection() {
 
       link.href = channel.url;
       link.textContent = channel.title;
+      link.classList.add("ytct-row");
 
       link.style.display = "block";
       link.style.padding = "2px 24px 2px 36px";
