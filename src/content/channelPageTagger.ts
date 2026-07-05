@@ -73,8 +73,16 @@ export async function addChannelPageTagger() {
     return;
   }
 
-  data.channels[channelId] = channel;
-  await saveAppData(data);
+  const existingChannel = data.channels[channelId];
+  const channelChanged =
+    !existingChannel ||
+    existingChannel.title !== channel.title ||
+    existingChannel.url !== channel.url;
+
+  if (channelChanged) {
+    data.channels[channelId] = channel;
+    await saveAppData(data);
+  }
 
   const tags = Object.values(data.tags).sort((a, b) => a.order - b.order);
 
