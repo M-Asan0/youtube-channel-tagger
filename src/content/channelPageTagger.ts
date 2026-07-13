@@ -151,8 +151,9 @@ export async function addChannelPageTagger() {
       chip.style.display = "inline-flex";
       chip.style.alignItems = "center";
       chip.style.gap = "4px";
-      chip.style.background = tag.color;
-      chip.style.color = "#fff";
+      chip.style.background = "transparent";
+      chip.style.border = `1px solid ${tag.color}`;
+      chip.style.color = textColor;
       chip.style.borderRadius = "999px";
       chip.style.padding = "4px 8px";
       chip.style.fontSize = "12px";
@@ -165,7 +166,7 @@ export async function addChannelPageTagger() {
       removeButton.textContent = "×";
       removeButton.style.background = "none";
       removeButton.style.border = "none";
-      removeButton.style.color = "#fff";
+      removeButton.style.color = textColor;
       removeButton.style.cursor = "pointer";
       removeButton.style.padding = "0";
       removeButton.style.lineHeight = "1";
