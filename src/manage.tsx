@@ -63,47 +63,24 @@ function App() {
         <div style={{ display: "flex", marginBottom: 16 }}>
           <button
             onClick={() => setActiveTab("channels")}
-            style={{
-              padding: "8px 16px",
-              border: "none",
-              borderBottom:
-                activeTab === "channels"
-                  ? "2px solid #000"
-                  : "2px solid transparent",
-              background: "transparent",
-              cursor: "pointer",
-              fontWeight: activeTab === "channels" ? "bold" : "normal",
-            }}
+            className={`tab-button${activeTab === "channels" ? " active" : ""}`}
+            style={{ width: 110 }}
           >
             Channels
           </button>
 
           <button
             onClick={() => setActiveTab("tags")}
-            style={{
-              padding: "8px 16px",
-              border: "none",
-              borderBottom:
-                activeTab === "tags" ? "2px solid #000" : "2px solid transparent",
-              background: "transparent",
-              cursor: "pointer",
-              fontWeight: activeTab === "tags" ? "bold" : "normal",
-            }}
+            className={`tab-button${activeTab === "tags" ? " active" : ""}`}
+            style={{ width: 90 }}
           >
             Tags
           </button>
 
           <button
             onClick={() => setActiveTab("importExport")}
-            style={{
-              padding: "8px 16px",
-              border: "none",
-              borderBottom:
-                activeTab === "importExport" ? "2px solid #000" : "2px solid transparent",
-              background: "transparent",
-              cursor: "pointer",
-              fontWeight: activeTab === "importExport" ? "bold" : "normal",
-            }}
+            className={`tab-button${activeTab === "importExport" ? " active" : ""}`}
+            style={{ width: 160 }}
           >
             Import / Export
           </button>
