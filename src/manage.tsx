@@ -57,119 +57,119 @@ function App() {
 
   return (
     <div>
-      <h1>YouTube Channel Tagger</h1>
+      <div style={{ padding: "0 16px" }}>
+        <h1>YouTube Channel Tagger</h1>
 
-      <div
-        style={{
-          display: "flex",
-          borderBottom: "1px solid #ccc",
-          marginBottom: 16,
-        }}
-      >
-        <button
-          onClick={() => setActiveTab("channels")}
-          style={{
-            padding: "8px 16px",
-            border: "none",
-            borderBottom:
-              activeTab === "channels"
-                ? "2px solid #000"
-                : "2px solid transparent",
-            background: "transparent",
-            cursor: "pointer",
-            fontWeight: activeTab === "channels" ? "bold" : "normal",
-          }}
-        >
-          Channels
-        </button>
-
-        <button
-          onClick={() => setActiveTab("tags")}
-          style={{
-            padding: "8px 16px",
-            border: "none",
-            borderBottom:
-              activeTab === "tags" ? "2px solid #000" : "2px solid transparent",
-            background: "transparent",
-            cursor: "pointer",
-            fontWeight: activeTab === "tags" ? "bold" : "normal",
-          }}
-        >
-          Tags
-        </button>
-
-        <button
-          onClick={() => setActiveTab("importExport")}
-          style={{
-            padding: "8px 16px",
-            border: "none",
-            borderBottom:
-              activeTab === "importExport" ? "2px solid #000" : "2px solid transparent",
-            background: "transparent",
-            cursor: "pointer",
-            fontWeight: activeTab === "importExport" ? "bold" : "normal",
-          }}
-        >
-          Import / Export
-        </button>
-      </div>
-
-      {activeTab === "channels" && (
-        <section>
-          <div
+        <div style={{ display: "flex", marginBottom: 16 }}>
+          <button
+            onClick={() => setActiveTab("channels")}
             style={{
-              display: "flex-col",
-              alignItems: "center",
-              justifyContent: "space-between",
-              paddingBottom: 8,
-              borderBottom: "1px solid #eee",
+              padding: "8px 16px",
+              border: "none",
+              borderBottom:
+                activeTab === "channels"
+                  ? "2px solid #000"
+                  : "2px solid transparent",
+              background: "transparent",
+              cursor: "pointer",
+              fontWeight: activeTab === "channels" ? "bold" : "normal",
             }}
           >
-            <h2>Channels</h2>
-            <button onClick={syncChannels} disabled={syncing}>
-              {syncing ? "synchronization..." : "Sync subscribed channels"}
-            </button>
-          </div>
+            Channels
+          </button>
 
-          {channels.length === 0 ? (
-            <p>登録チャンネルがありません</p>
-          ) : (
-            <ul style={{ listStyle: "none", padding: 0 }}>
-              {channels.map((ch) => (
-                <li
-                  key={ch.id}
-                  style={{
-                    marginBottom: 8,
-                    paddingBottom: 8,
-                    borderBottom: "1px solid #eee",
-                  }}
-                >
-                  <strong>{ch.title}</strong>
-                  <br />
+          <button
+            onClick={() => setActiveTab("tags")}
+            style={{
+              padding: "8px 16px",
+              border: "none",
+              borderBottom:
+                activeTab === "tags" ? "2px solid #000" : "2px solid transparent",
+              background: "transparent",
+              cursor: "pointer",
+              fontWeight: activeTab === "tags" ? "bold" : "normal",
+            }}
+          >
+            Tags
+          </button>
 
-                  <ChannelTagInput
-                    allTags={tags}
-                    selectedIds={appData.channelTags[ch.id] ?? []}
-                    onChange={(ids) => updateChannelTags(ch.id, ids)}
-                  />
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
-      )}
+          <button
+            onClick={() => setActiveTab("importExport")}
+            style={{
+              padding: "8px 16px",
+              border: "none",
+              borderBottom:
+                activeTab === "importExport" ? "2px solid #000" : "2px solid transparent",
+              background: "transparent",
+              cursor: "pointer",
+              fontWeight: activeTab === "importExport" ? "bold" : "normal",
+            }}
+          >
+            Import / Export
+          </button>
+        </div>
+      </div>
 
-      {activeTab === "tags" && (
-        <TagManagement
-          tags={tags}
-          appData={appData}
-          setAppData={setAppData}
-        />
-      )}
+      <hr style={{ border: "none", borderTop: "1px solid #ccc", margin: 0 }} />
 
-      {activeTab === "importExport" && (
-        <ImportExportManagement appData={appData} setAppData={setAppData} />
-      )}
+      <div style={{ padding: "0 16px", marginTop: 16 }}>
+        {activeTab === "channels" && (
+          <section>
+            <div
+              style={{
+                display: "flex-col",
+                alignItems: "center",
+                justifyContent: "space-between",
+                paddingBottom: 8,
+                borderBottom: "1px solid #eee",
+              }}
+            >
+              <h2>Channels</h2>
+              <button onClick={syncChannels} disabled={syncing}>
+                {syncing ? "synchronization..." : "Sync subscribed channels"}
+              </button>
+            </div>
+
+            {channels.length === 0 ? (
+              <p>登録チャンネルがありません</p>
+            ) : (
+              <ul style={{ listStyle: "none", padding: 0 }}>
+                {channels.map((ch) => (
+                  <li
+                    key={ch.id}
+                    style={{
+                      marginBottom: 8,
+                      paddingBottom: 8,
+                      borderBottom: "1px solid #eee",
+                    }}
+                  >
+                    <strong>{ch.title}</strong>
+                    <br />
+
+                    <ChannelTagInput
+                      allTags={tags}
+                      selectedIds={appData.channelTags[ch.id] ?? []}
+                      onChange={(ids) => updateChannelTags(ch.id, ids)}
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        )}
+
+        {activeTab === "tags" && (
+          <TagManagement
+            tags={tags}
+            appData={appData}
+            setAppData={setAppData}
+          />
+        )}
+
+        {activeTab === "importExport" && (
+          <ImportExportManagement appData={appData} setAppData={setAppData} />
+        )}
+      </div>
     </div>
   );
 }
