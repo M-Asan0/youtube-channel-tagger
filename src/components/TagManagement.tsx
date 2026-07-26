@@ -140,7 +140,7 @@ export function TagManagement({
         </div>
       </div>
 
-      <div className="panel">
+      <div className="panel" style={{ maxHeight: "71vh", overflowY: "auto" }}>
         {tags.length === 0 ? (
           <p>No tags available</p>
         ) : (
@@ -165,9 +165,11 @@ export function TagManagement({
             <tbody>
               {tags.map((tag) => (
                 <tr key={tag.id}>
-                  <td style={{ padding: "8px 0" }}>{tag.name}</td>
+                  <td style={{ padding: "8px 0", borderBottom: "1px solid #eee" }}>
+                    {tag.name}
+                  </td>
 
-                  <td style={{ padding: "8px 0" }}>
+                  <td style={{ padding: "8px 0", borderBottom: "1px solid #eee" }}>
                     <span
                       style={{
                         display: "inline-block",
@@ -182,9 +184,11 @@ export function TagManagement({
                     {tag.color}
                   </td>
 
-                  <td style={{ padding: "8px 0" }}>{getUsedCount(tag.id)}</td>
+                  <td style={{ padding: "8px 0", borderBottom: "1px solid #eee" }}>
+                    {getUsedCount(tag.id)}
+                  </td>
 
-                  <td style={{ padding: "8px 0" }}>
+                  <td style={{ padding: "8px 0", borderBottom: "1px solid #eee" }}>
                     <button onClick={() => setEditingTag(tag)}>Edit</button>
                     <button
                       onClick={() => deleteTag(tag.id)}
