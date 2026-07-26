@@ -1,3 +1,10 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Hiragino Sans", "Noto Sans JP",
+    Meiryo, "Yu Gothic UI", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
 *,
 *::before,
 *::after {
@@ -11,6 +18,10 @@
 
 .tag-candidate-item:hover {
   background: #e8f0fe;
+}
+
+.tag-search-input::placeholder {
+  color: #aaa;
 }
 
 .tab-button {

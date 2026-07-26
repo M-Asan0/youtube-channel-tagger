@@ -22,10 +22,10 @@ export function ChannelSelectedTags({
           <span
             key={id}
             style={{
-              border: "1px solid #ddd",
-              borderBottom: `2px solid ${tag.color}`,
-              borderRadius: 4,
-              padding: "2px 4px 1px",
+              background: "#fff",
+              border: `2px solid ${tag.color}`,
+              borderRadius: 999,
+              padding: "2px 8px",
               fontSize: 12,
               display: "flex",
               alignItems: "center",

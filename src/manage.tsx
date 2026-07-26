@@ -103,15 +103,16 @@ function App() {
               </button>
             </div>
 
-            <div className="panel panel--wide" style={{ maxHeight: "67vh", overflowY: "auto" }}>
+            <div className="panel panel--wide" style={{ maxHeight: "70vh", overflowY: "auto" }}>
               {channels.length === 0 ? (
                 <p>登録チャンネルがありません</p>
               ) : (
                 <ul className="channel-grid">
                   {channels.map((ch) => (
                     <li key={ch.id} className="channel-card">
-                      <strong>{ch.title}</strong>
-                      <br />
+                      <strong style={{ display: "block", marginBottom: 8 }}>
+                        {ch.title}
+                      </strong>
 
                       <ChannelTagInput
                         allTags={tags}

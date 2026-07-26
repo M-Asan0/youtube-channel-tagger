@@ -42,7 +42,7 @@ export function ChannelTagInput({
         flexWrap: "wrap",
         alignItems: "center",
         gap: 4,
-        border: "1px solid #ccc",
+        border: "1px solid #999",
         padding: 4,
         width: "100%",
       }}
@@ -63,6 +63,7 @@ export function ChannelTagInput({
         onFocus={() => setOpen(true)}
         onBlur={() => setTimeout(() => setOpen(false), 150)}
         placeholder="search the tag..."
+        className="tag-search-input"
         style={{ border: "none", outline: "none", flex: 1, minWidth: 60 }}
       />
 
