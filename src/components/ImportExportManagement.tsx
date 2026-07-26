@@ -54,25 +54,32 @@ export function ImportExportManagement({ appData, setAppData }: ImportExportMana
 
   return (
     <section>
-      <h2>Export</h2>
-      <button
-        onClick={() => handleExport()}
-      >Export</button>
-      <h2>Import</h2>
-      <input
-        type="file"
-        accept="application/json"
-        onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-      ></input>
-      <button
-        disabled={!file}
-        onClick={() => {
-          if (!file) return;
-          handleImport(file)
-        }}
-      >
-        Import
-      </button>
+      <h2 style={{ marginTop: 0 }}>Export</h2>
+      <div className="panel">
+        <button
+          className="standalone-btn"
+          onClick={() => handleExport()}
+        >Export</button>
+      </div>
+
+      <h2 style={{ marginTop: 0 }}>Import</h2>
+      <div className="panel">
+        <input
+          type="file"
+          accept="application/json"
+          onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+        ></input>
+        <button
+          className="standalone-btn"
+          disabled={!file}
+          onClick={() => {
+            if (!file) return;
+            handleImport(file)
+          }}
+        >
+          Import
+        </button>
+      </div>
     </section >
   )
 }

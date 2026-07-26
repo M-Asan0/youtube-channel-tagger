@@ -108,95 +108,97 @@ export function TagManagement({
 
   return (
     <section>
-      <h2>Tags</h2>
+      <h2 style={{ marginTop: 0 }}>Tags</h2>
 
-      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        <label>New Tag Name</label>
-        <input
-          value={tagInput}
-          onChange={(e) => setTagInput(e.target.value)}
-          placeholder="tag name"
-        />
+      <div className="panel">
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <label>New Tag Name</label>
+          <input
+            value={tagInput}
+            onChange={(e) => setTagInput(e.target.value)}
+            placeholder="tag name"
+          />
 
-        <label>Color</label>
-        <input
-          value={colorInput}
-          onChange={(e) => setColorInput(e.target.value)}
-          placeholder="#999999"
-        />
+          <label>Color</label>
+          <input
+            value={colorInput}
+            onChange={(e) => setColorInput(e.target.value)}
+            placeholder="#999999"
+          />
 
-        <span
-          style={{
-            display: "inline-block",
-            width: 20,
-            height: 20,
-            background: colorInput,
-            border: "1px solid #ccc",
-          }}
-        />
+          <span
+            style={{
+              display: "inline-block",
+              width: 20,
+              height: 20,
+              background: colorInput,
+              border: "1px solid #ccc",
+            }}
+          />
 
-        <button onClick={addTag}>Add</button>
+          <button onClick={addTag}>Add</button>
+        </div>
       </div>
 
-      <h3>Tag List</h3>
-
-      {tags.length === 0 ? (
-        <p>No tags available</p>
-      ) : (
-        <table style={{ borderCollapse: "collapse", width: "100%" }}>
-          <thead>
-            <tr>
-              <th style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
-                Tag Name
-              </th>
-              <th style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
-                Color
-              </th>
-              <th style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
-                Channels Using
-              </th>
-              <th style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
-                Actions
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {tags.map((tag) => (
-              <tr key={tag.id}>
-                <td style={{ padding: "8px 0" }}>{tag.name}</td>
-
-                <td style={{ padding: "8px 0" }}>
-                  <span
-                    style={{
-                      display: "inline-block",
-                      width: 16,
-                      height: 16,
-                      background: tag.color,
-                      border: "1px solid #ccc",
-                      marginRight: 8,
-                      verticalAlign: "middle",
-                    }}
-                  />
-                  {tag.color}
-                </td>
-
-                <td style={{ padding: "8px 0" }}>{getUsedCount(tag.id)}</td>
-
-                <td style={{ padding: "8px 0" }}>
-                  <button onClick={() => setEditingTag(tag)}>Edit</button>
-                  <button
-                    onClick={() => deleteTag(tag.id)}
-                    style={{ marginLeft: 8 }}
-                  >
-                    Delete
-                  </button>
-                </td>
+      <div className="panel">
+        {tags.length === 0 ? (
+          <p>No tags available</p>
+        ) : (
+          <table style={{ borderCollapse: "collapse", width: "100%" }}>
+            <thead>
+              <tr>
+                <th style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
+                  Tag Name
+                </th>
+                <th style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
+                  Color
+                </th>
+                <th style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
+                  Channels Using
+                </th>
+                <th style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
+                  Actions
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+            </thead>
+
+            <tbody>
+              {tags.map((tag) => (
+                <tr key={tag.id}>
+                  <td style={{ padding: "8px 0" }}>{tag.name}</td>
+
+                  <td style={{ padding: "8px 0" }}>
+                    <span
+                      style={{
+                        display: "inline-block",
+                        width: 16,
+                        height: 16,
+                        background: tag.color,
+                        border: "1px solid #ccc",
+                        marginRight: 8,
+                        verticalAlign: "middle",
+                      }}
+                    />
+                    {tag.color}
+                  </td>
+
+                  <td style={{ padding: "8px 0" }}>{getUsedCount(tag.id)}</td>
+
+                  <td style={{ padding: "8px 0" }}>
+                    <button onClick={() => setEditingTag(tag)}>Edit</button>
+                    <button
+                      onClick={() => deleteTag(tag.id)}
+                      style={{ marginLeft: 8 }}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
 
       {editingTag && (<TagEditModal editingTag={editingTag} setEditingTag={setEditingTag} updateTag={updateTag} />)}
     </section>

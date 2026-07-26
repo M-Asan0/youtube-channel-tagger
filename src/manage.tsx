@@ -87,51 +87,49 @@ function App() {
         </div>
       </div>
 
-      <hr style={{ border: "none", borderTop: "1px solid #ccc", margin: 0 }} />
-
-      <div style={{ padding: "0 16px", marginTop: 16 }}>
+      <div
+        style={{
+          padding: "16px",
+          background: "#f2f2f2",
+        }}
+      >
         {activeTab === "channels" && (
           <section>
-            <div
-              style={{
-                display: "flex-col",
-                alignItems: "center",
-                justifyContent: "space-between",
-                paddingBottom: 8,
-                borderBottom: "1px solid #eee",
-              }}
-            >
-              <h2>Channels</h2>
-              <button onClick={syncChannels} disabled={syncing}>
+            <h2 style={{ marginTop: 0 }}>Channels</h2>
+
+            <div className="panel">
+              <button onClick={syncChannels} disabled={syncing} className="standalone-btn">
                 {syncing ? "synchronization..." : "Sync subscribed channels"}
               </button>
             </div>
 
-            {channels.length === 0 ? (
-              <p>登録チャンネルがありません</p>
-            ) : (
-              <ul style={{ listStyle: "none", padding: 0 }}>
-                {channels.map((ch) => (
-                  <li
-                    key={ch.id}
-                    style={{
-                      marginBottom: 8,
-                      paddingBottom: 8,
-                      borderBottom: "1px solid #eee",
-                    }}
-                  >
-                    <strong>{ch.title}</strong>
-                    <br />
+            <div className="panel">
+              {channels.length === 0 ? (
+                <p>登録チャンネルがありません</p>
+              ) : (
+                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                  {channels.map((ch) => (
+                    <li
+                      key={ch.id}
+                      style={{
+                        marginBottom: 8,
+                        paddingBottom: 8,
+                        borderBottom: "1px solid #eee",
+                      }}
+                    >
+                      <strong>{ch.title}</strong>
+                      <br />
 
-                    <ChannelTagInput
-                      allTags={tags}
-                      selectedIds={appData.channelTags[ch.id] ?? []}
-                      onChange={(ids) => updateChannelTags(ch.id, ids)}
-                    />
-                  </li>
-                ))}
-              </ul>
-            )}
+                      <ChannelTagInput
+                        allTags={tags}
+                        selectedIds={appData.channelTags[ch.id] ?? []}
+                        onChange={(ids) => updateChannelTags(ch.id, ids)}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </section>
         )}
 
