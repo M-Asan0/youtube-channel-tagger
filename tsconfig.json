@@ -9,10 +9,12 @@
 
     "strict": true,
 
+    "jsx": "react-jsx",
+
     "sourceMap": true,
     "skipLibCheck": true,
 
     "types": ["chrome"]
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
 }
