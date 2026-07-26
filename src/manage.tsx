@@ -60,7 +60,7 @@ function App() {
       <div style={{ padding: "0 16px" }}>
         <h1>YouTube Channel Tagger</h1>
 
-        <div style={{ display: "flex", marginBottom: 16 }}>
+        <div style={{ display: "flex", marginBottom: 4 }}>
           <button
             onClick={() => setActiveTab("channels")}
             className={`tab-button${activeTab === "channels" ? " active" : ""}`}
