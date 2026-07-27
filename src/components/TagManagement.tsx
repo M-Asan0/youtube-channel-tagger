@@ -111,30 +111,24 @@ export function TagManagement({
       <h2 style={{ marginTop: 0 }}>Tags</h2>
 
       <div className="panel">
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <label>New Tag Name</label>
-          <input
-            value={tagInput}
-            onChange={(e) => setTagInput(e.target.value)}
-            placeholder="tag name"
-          />
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+            <label>New Tag Name</label>
+            <input
+              value={tagInput}
+              onChange={(e) => setTagInput(e.target.value)}
+              placeholder="tag name"
+            />
+          </div>
 
-          <label>Color</label>
-          <input
-            value={colorInput}
-            onChange={(e) => setColorInput(e.target.value)}
-            placeholder="#999999"
-          />
-
-          <span
-            style={{
-              display: "inline-block",
-              width: 20,
-              height: 20,
-              background: colorInput,
-              border: "1px solid #ccc",
-            }}
-          />
+          <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+            <label>Color</label>
+            <input
+              type="color"
+              value={colorInput}
+              onChange={(e) => setColorInput(e.target.value)}
+            />
+          </div>
 
           <button onClick={addTag}>Add</button>
         </div>
