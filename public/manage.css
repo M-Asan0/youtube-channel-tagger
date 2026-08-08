@@ -92,3 +92,49 @@ body {
   border-radius: 8px;
   padding: 12px;
 }
+
+/* 常に入力欄だが、hover するまで枠を見せない */
+.inline-input {
+  width: 100%;
+  padding: 4px 6px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+}
+
+.inline-input:hover {
+  border-color: #ddd;
+  background: #fafafa;
+}
+
+.inline-input:focus {
+  outline: none;
+  border-color: #4c8bf5;
+  background: #fff;
+}
+
+.inline-color {
+  width: 32px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: none;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.inline-color:hover {
+  border-color: #999;
+}
+
+.inline-color::-webkit-color-swatch-wrapper {
+  padding: 2px;
+}
+
+.inline-color::-webkit-color-swatch {
+  border: none;
+  border-radius: 2px;
+}

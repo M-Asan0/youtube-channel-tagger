@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { saveAppData } from "../storage";
-import { TagEditModal } from "./TagEditModal"
+import { TagRow } from "./TagRow";
 import type { AppData, Tag } from "../types";
 
 type TagManagementProps = {
@@ -9,6 +9,8 @@ type TagManagementProps = {
   setAppData: React.Dispatch<React.SetStateAction<AppData | null>>;
 };
 
+const headerStyle = { textAlign: "left", borderBottom: "1px solid #ccc" } as const;
+
 export function TagManagement({
   tags,
   appData,
@@ -16,7 +18,6 @@ export function TagManagement({
 }: TagManagementProps) {
   const [tagInput, setTagInput] = useState("");
   const [colorInput, setColorInput] = useState("#999999");
-  const [editingTag, setEditingTag] = useState<Tag | null>(null);
 
   async function commitAppData(next: AppData) {
     await saveAppData(next);
@@ -48,26 +49,19 @@ export function TagManagement({
     setColorInput("#999999");
   }
 
-  async function updateTag() {
-    if (!editingTag) return;
-
-    const name = editingTag.name.trim();
-    if (!name) return;
-
+  async function updateTag(tagId: string, patch: Partial<Tag>) {
     const next = {
       ...appData,
       tags: {
         ...appData.tags,
-        [editingTag.id]: {
-          ...appData.tags[editingTag.id],
-          name,
-          color: editingTag.color,
+        [tagId]: {
+          ...appData.tags[tagId],
+          ...patch,
         },
       },
     };
 
     await commitAppData(next);
-    setEditingTag(null);
   }
 
   async function deleteTag(tagId: string) {
@@ -117,6 +111,9 @@ export function TagManagement({
             <input
               value={tagInput}
               onChange={(e) => setTagInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") addTag();
+              }}
               placeholder="tag name"
             />
           </div>
@@ -125,6 +122,7 @@ export function TagManagement({
             <label>Color</label>
             <input
               type="color"
+              className="inline-color"
               value={colorInput}
               onChange={(e) => setColorInput(e.target.value)}
             />
@@ -141,64 +139,28 @@ export function TagManagement({
           <table style={{ borderCollapse: "collapse", width: "100%" }}>
             <thead>
               <tr>
-                <th style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
-                  Tag Name
-                </th>
-                <th style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
-                  Color
-                </th>
-                <th style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
-                  Channels Using
-                </th>
-                <th style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
-                  Actions
-                </th>
+                <th style={headerStyle}>Tag Name</th>
+                <th style={{ ...headerStyle, width: 80 }}>Color</th>
+                <th style={{ ...headerStyle, width: 130 }}>Channels Using</th>
+                <th style={{ ...headerStyle, width: 90 }}>Actions</th>
               </tr>
             </thead>
 
             <tbody>
               {tags.map((tag) => (
-                <tr key={tag.id}>
-                  <td style={{ padding: "8px 0", borderBottom: "1px solid #eee" }}>
-                    {tag.name}
-                  </td>
-
-                  <td style={{ padding: "8px 0", borderBottom: "1px solid #eee" }}>
-                    <span
-                      style={{
-                        display: "inline-block",
-                        width: 16,
-                        height: 16,
-                        background: tag.color,
-                        border: "1px solid #ccc",
-                        marginRight: 8,
-                        verticalAlign: "middle",
-                      }}
-                    />
-                    {tag.color}
-                  </td>
-
-                  <td style={{ padding: "8px 0", borderBottom: "1px solid #eee" }}>
-                    {getUsedCount(tag.id)}
-                  </td>
-
-                  <td style={{ padding: "8px 0", borderBottom: "1px solid #eee" }}>
-                    <button onClick={() => setEditingTag(tag)}>Edit</button>
-                    <button
-                      onClick={() => deleteTag(tag.id)}
-                      style={{ marginLeft: 8 }}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
+                <TagRow
+                  key={tag.id}
+                  tag={tag}
+                  usedCount={getUsedCount(tag.id)}
+                  onRename={(name) => updateTag(tag.id, { name })}
+                  onRecolor={(color) => updateTag(tag.id, { color })}
+                  onDelete={() => deleteTag(tag.id)}
+                />
               ))}
             </tbody>
           </table>
         )}
       </div>
-
-      {editingTag && (<TagEditModal editingTag={editingTag} setEditingTag={setEditingTag} updateTag={updateTag} />)}
     </section>
   );
 }
