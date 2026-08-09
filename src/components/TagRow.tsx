@@ -23,7 +23,6 @@ export function TagRow({
 
   const colorRef = useRef<HTMLInputElement>(null);
   const revertNameRef = useRef(false);
-  const colorCommittedRef = useRef(false);
 
   // 保存済みの値が変わったら下書きを追従させる
   useEffect(() => setName(tag.name), [tag.name]);
@@ -53,23 +52,12 @@ export function TagRow({
     const handleChange = () => {
       if (el.value === tag.color) return;
 
-      colorCommittedRef.current = true;
       onRecolor(el.value);
     };
 
     el.addEventListener("change", handleChange);
     return () => el.removeEventListener("change", handleChange);
   }, [tag.color, onRecolor]);
-
-  // Escape で閉じた時は change が飛ばないので、表示だけ保存済みの色に戻す
-  function syncColor() {
-    if (colorCommittedRef.current) {
-      colorCommittedRef.current = false;
-      return;
-    }
-
-    setColor(tag.color);
-  }
 
   return (
     <tr>
@@ -97,7 +85,6 @@ export function TagRow({
           className="inline-color"
           value={color}
           onChange={(e) => setColor(e.target.value)}
-          onBlur={syncColor}
         />
       </td>
 
