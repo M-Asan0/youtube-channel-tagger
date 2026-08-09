@@ -9,7 +9,15 @@ type TagManagementProps = {
   setAppData: React.Dispatch<React.SetStateAction<AppData | null>>;
 };
 
-const headerStyle = { textAlign: "left", borderBottom: "1px solid #ccc" } as const;
+const headerStyle: React.CSSProperties = { 
+  textAlign: "left",
+  position: "sticky",
+  top: 0,
+  zIndex: 1,
+  background: "#fff",
+  boxShadow: "0 -8px 0 0 #fff, inset 0 -1px 0 #ccc",
+  padding: "8px 12px",
+ };
 
 export function TagManagement({
   tags,
@@ -132,11 +140,11 @@ export function TagManagement({
         </div>
       </div>
 
-      <div className="panel" style={{ maxHeight: "71vh", overflowY: "auto" }}>
+      <div className="panel" style={{ maxHeight: "71vh", overflowY: "auto", padding: "0" }}>
         {tags.length === 0 ? (
           <p>No tags available</p>
         ) : (
-          <table style={{ borderCollapse: "collapse", width: "100%" }}>
+          <table style={{ borderCollapse: "separate", borderSpacing: 0, width: "100%" }}>
             <thead>
               <tr>
                 <th style={headerStyle}>Tag Name</th>
