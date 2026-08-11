@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import type { Tag } from "../types";
 
 type ChannelSelectedTagsProps = {
@@ -12,14 +13,7 @@ export function ChannelSelectedTags({
   onRemove,
 }: ChannelSelectedTagsProps) {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: 4,
-        marginTop: 4,
-      }}
-    >
+    <Fragment>
       {selectedIds.map((id) => {
         const tag = allTags.find((t) => t.id === id);
         if (!tag) return null;
@@ -28,14 +22,15 @@ export function ChannelSelectedTags({
           <span
             key={id}
             style={{
-              border: "1px solid #ddd",
-              borderBottom: `2px solid ${tag.color}`,
-              borderRadius: 4,
-              padding: "2px 4px 1px",
+              background: "#fff",
+              border: `2px solid ${tag.color}`,
+              borderRadius: 999,
+              padding: "2px 8px",
               fontSize: 12,
               display: "flex",
               alignItems: "center",
               gap: 4,
+              flexShrink: 0,
             }}
           >
             {tag.name}
@@ -55,6 +50,6 @@ export function ChannelSelectedTags({
           </span>
         );
       })}
-    </div>
+    </Fragment>
   );
 }

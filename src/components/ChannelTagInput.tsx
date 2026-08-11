@@ -35,63 +35,65 @@ export function ChannelTagInput({
   }
 
   return (
-    <div>
-      <div
-        style={{
-          position: "relative",
-          display: "inline-flex",
-          border: "1px solid #ccc",
-          padding: 4,
-          minWidth: 200,
-        }}
-      >
-        <input
-          ref={inputRef}
-          value={query}
-          onChange={(e) => {
-            setQuery(e.target.value);
-            setOpen(true);
-          }}
-          onFocus={() => setOpen(true)}
-          onBlur={() => setTimeout(() => setOpen(false), 150)}
-          placeholder="search the tag..."
-          style={{ border: "none", outline: "none", minWidth: 100 }}
-        />
-
-        {open && candidates.length > 0 && (
-          <ul
-            style={{
-              position: "absolute",
-              top: "100%",
-              left: 0,
-              background: "#fff",
-              border: "1px solid #ccc",
-              listStyle: "none",
-              margin: 0,
-              padding: 0,
-              zIndex: 10,
-              width: "100%",
-            }}
-          >
-            {candidates.map((t) => (
-              <li
-                key={t.id}
-                onMouseDown={() => select(t.id)}
-                style={{ padding: "4px 8px", cursor: "pointer" }}
-                className="tag-candidate-item"
-              >
-                {t.name}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
+    <div
+      style={{
+        position: "relative",
+        display: "flex",
+        flexWrap: "wrap",
+        alignItems: "center",
+        gap: 4,
+        border: "1px solid #999",
+        padding: 4,
+        width: "100%",
+      }}
+    >
       <ChannelSelectedTags
         allTags={allTags}
         selectedIds={selectedIds}
         onRemove={remove}
       />
+
+      <input
+        ref={inputRef}
+        value={query}
+        onChange={(e) => {
+          setQuery(e.target.value);
+          setOpen(true);
+        }}
+        onFocus={() => setOpen(true)}
+        onBlur={() => setTimeout(() => setOpen(false), 150)}
+        placeholder="search the tag..."
+        className="tag-search-input"
+        style={{ border: "none", outline: "none", flex: 1, minWidth: 60 }}
+      />
+
+      {open && candidates.length > 0 && (
+        <ul
+          style={{
+            position: "absolute",
+            top: "100%",
+            left: 0,
+            background: "#fff",
+            border: "1px solid #ccc",
+            listStyle: "none",
+            margin: 0,
+            padding: 0,
+            zIndex: 10,
+            width: "100%",
+          }}
+        >
+          {candidates.map((t) => (
+            <li
+              key={t.id}
+              onMouseDown={() => select(t.id)}
+              style={{ padding: "4px 8px", cursor: "pointer" }}
+              className="tag-candidate-item"
+            >
+              {t.name}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
