@@ -12,6 +12,7 @@ function App() {
   const [appData, setAppData] = useState<AppData | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>("channels");
   const [syncing, setSyncing] = useState(false);
+  const [syncFailed, setSyncFailed] = useState(false);
 
   useEffect(() => {
     fetchAppData().then(setAppData);
@@ -19,8 +20,12 @@ function App() {
 
   async function syncChannels() {
     setSyncing(true);
+    setSyncFailed(false);
     try {
-      await chrome.runtime.sendMessage({ type: "syncChannelsRequest" });
+      const result = await chrome.runtime.sendMessage({
+        type: "syncChannelsRequest",
+      });
+      setSyncFailed(!result?.ok);
       setAppData(await fetchAppData());
     } finally {
       setSyncing(false);
@@ -101,6 +106,12 @@ function App() {
               <button onClick={syncChannels} disabled={syncing} className="standalone-btn">
                 {syncing ? "synchronization..." : "Sync subscribed channels"}
               </button>
+
+              {syncFailed && (
+                <span style={{ marginLeft: 12, color: "#b3261e" }}>
+                  Could not sync channels.
+                </span>
+              )}
             </div>
 
             <div className="panel panel--wide" style={{ maxHeight: "70vh", overflowY: "auto" }}>
