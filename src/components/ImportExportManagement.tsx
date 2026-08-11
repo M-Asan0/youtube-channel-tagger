@@ -62,7 +62,7 @@ export function ImportExportManagement({ appData, setAppData }: ImportExportMana
         >Export</button>
       </div>
 
-      <h2 style={{ marginTop: 0 }}>Import</h2>
+      <h2 style={{ marginTop: 24 }}>Import</h2>
       <div className="panel">
         <input
           type="file"
