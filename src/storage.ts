@@ -1,6 +1,6 @@
 import type { AppData } from "./types";
 
-const STORAGE_KEY = "youtubeChannelTaggerData";
+const STORAGE_KEY = "channelTaggerForYouTubeData";
 
 export const DEFAULT_DATA: AppData = {
   version: 1,

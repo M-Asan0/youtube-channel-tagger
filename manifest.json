@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "youtube-channel-tagger",
+  "name": "Channel Tagger for YouTube",
   "version": "0.1.0",
   "permissions": ["storage"],
   "host_permissions": ["https://www.youtube.com/*"],

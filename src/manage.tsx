@@ -58,7 +58,7 @@ function App() {
   return (
     <div>
       <div style={{ padding: "0 16px" }}>
-        <h1>YouTube Channel Tagger</h1>
+        <h1>Channel Tagger for YouTube</h1>
 
         <div style={{ display: "flex", marginBottom: 4 }}>
           <button

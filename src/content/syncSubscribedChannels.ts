@@ -6,14 +6,14 @@ export async function syncSubscribedChannels() {
   const ytInitialData = parseYtInitialData(document.documentElement.innerHTML);
 
   if (!ytInitialData) {
-    console.log("youtube-channel-tagger: ytInitialData not found");
+    console.log("channel-tagger-for-youtube: ytInitialData not found");
     return;
   }
 
   const channels = extractChannelsFromYtInitialData(ytInitialData);
 
   if (channels.length === 0) {
-    console.log("youtube-channel-tagger: no subscribed channels found");
+    console.log("channel-tagger-for-youtube: no subscribed channels found");
     return;
   }
 
@@ -26,7 +26,7 @@ export async function syncSubscribedChannels() {
 
     await saveAppData(data);
 
-    console.log(`youtube-channel-tagger: synced ${channels.length} channels`);
+    console.log(`channel-tagger-for-youtube: synced ${channels.length} channels`);
   } catch {
     // Extension context may have been invalidated by a reload
   }
