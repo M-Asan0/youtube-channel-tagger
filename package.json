@@ -1,9 +1,9 @@
 {
-  "name": "youtube-channel-tagger",
+  "name": "channel-tagger-for-youtube",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "copy": "mkdir -p dist && cp manifest.json dist/manifest.json && cp public/popup.html dist/popup.html && cp public/manage.html dist/manage.html && cp public/content.css dist/content.css && cp public/manage.css dist/manage.css",
+    "copy": "mkdir -p dist/icons && cp manifest.json dist/manifest.json && cp public/popup.html dist/popup.html && cp public/manage.html dist/manage.html && cp public/content.css dist/content.css && cp public/manage.css dist/manage.css && cp public/icons/*.png dist/icons/",
     "watch": "npm run copy && concurrently \"esbuild src/content.ts src/popup.ts src/manage.tsx src/background.ts --bundle --outdir=dist --format=iife --sourcemap --jsx=automatic --watch=forever\" \"chokidar 'public/**' 'manifest.json' -c 'npm run copy'\""
   },
   "dependencies": {

@@ -1,1 +1,1 @@
-console.log("youtube-channel-tagger popup loaded");
+console.log("channel-tagger-for-youtube popup loaded");

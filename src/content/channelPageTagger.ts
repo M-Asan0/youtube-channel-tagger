@@ -117,7 +117,7 @@ export async function addChannelPageTagger() {
 
     const placeholder = document.createElement("option");
     placeholder.value = "";
-    placeholder.textContent = "タグを選択...";
+    placeholder.textContent = "Select a tag...";
     placeholder.hidden = true;
     placeholder.disabled = true;
     placeholder.selected = true;

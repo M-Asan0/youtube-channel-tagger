@@ -23,7 +23,7 @@ function isAppData(data: unknown): data is AppData {
 export function ImportExportManagement({ appData, setAppData }: ImportExportManagementProps) {
   const [file, setFile] = useState<File | null>(null)
 
-  const fileName = "youtube-channel-tagger"
+  const fileName = "channel-tagger-for-youtube"
   const fileNameWithJson = `${fileName}.json`
 
   function handleExport() {
