@@ -76,7 +76,7 @@ export function TagManagement({
     const usedCount = getUsedCount(tagId);
 
     const ok = confirm(
-      `このタグを削除しますか？\n${usedCount} 件のチャンネルからこのタグが外れます。`
+      `Delete this tag?\nIt will be removed from ${usedCount} channel${usedCount === 1 ? "" : "s"}.`
     );
 
     if (!ok) return;

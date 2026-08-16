@@ -116,7 +116,7 @@ function App() {
 
             <div className="panel panel--wide" style={{ maxHeight: "70vh", overflowY: "auto" }}>
               {channels.length === 0 ? (
-                <p>登録チャンネルがありません</p>
+                <p>No subscribed channels yet.</p>
               ) : (
                 <ul className="channel-grid">
                   {channels.map((ch) => (
